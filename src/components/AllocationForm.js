@@ -1,8 +1,10 @@
 import React, { useContext, useState } from 'react';
 import { AppContext } from '../context/AppContext';
+import CurrencyDropDown from './Currency';
+import CurrencyChange from './ChangeCurrency';
 
 const AllocationForm = (props) => {
-    const { dispatch,remaining  } = useContext(AppContext);
+    const { dispatch,remaining,currency } = useContext(AppContext);
 
     const [name, setName] = useState('');
     const [cost, setCost] = useState('');
@@ -36,9 +38,12 @@ const AllocationForm = (props) => {
     return (
         <div>
             <div className='row'>
-
-            <div className="input-group mb-3" style={{ marginLeft: '2rem' }}>
-                    <div className="input-group-prepend">
+            
+            <div className="input-group mb-4" style={{ marginLeft: '2rem' }}>
+            <div className="input-group-prepend">
+                <CurrencyDropDown />
+            </div>
+                    <div className="input-group-prepend" style={{ marginLeft: '2rem' }}>
                 <label className="input-group-text" htmlFor="inputGroupSelect01">Department</label>
                   </div>
                   <select className="custom-select" id="inputGroupSelect01" onChange={(event) => setName(event.target.value)}>
@@ -59,12 +64,13 @@ const AllocationForm = (props) => {
                 <option value="Reduce" name="Reduce">Reduce</option>
                   </select>
 
+                  <label htmlFor="cost" style={{ marginLeft: '2rem', fontSize: 20}}>{currency}</label>
                     <input
                         required='required'
                         type='number'
                         id='cost'
                         value={cost}
-                        style={{ marginLeft: '2rem' , size: 10}}
+                        style={{ marginLeft: '1rem' , size: 10}}
                         onChange={(event) => setCost(event.target.value)}>
                         </input>
 
